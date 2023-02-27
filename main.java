@@ -16,13 +16,18 @@ public class main {
         return currentDate;
     }
 
-    /*
+/*
     public static Date compareDate(){
 
     }
-    */ //yyyy-MM-dd hh:mm:ss
+
+ */
+     //yyyy-MM-dd hh:mm:ss
 
     public static void main(String[] args) {
+
+
+
         SimpleDateFormat ft = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
         Scanner sc = new Scanner(System.in);
         System.out.println("enter exsperiry date (yyyy-MM-dd) : ");
@@ -65,18 +70,27 @@ public class main {
         long start = System.currentTimeMillis();
 
         //from 1970-00-00 00:00:00
-
+        int days = 0;
         int fyear = (Integer.valueOf(year)-1970)*12;
+        days = (fyear / 4) * 1461;
+        days += (fyear % 4) * 365;
 
-        int fmonth = Integer.valueOf(month)-1+fyear;
+        int fmonth = Integer.valueOf(month)-1;
 
-        int days;
-
-        switch (Integer.valueOf(month)) {
-            case 1: case 3: case 5: case 6: case 8: case 10: case 12: days = 31;
-            case 4: case 7: case 9: case 11: days = 30;
-            default: if (Integer.valueOf(year)%4 == 0) {days = 29;} else {days = 28;}
+        switch (fmonth) {
+            case 1: days += 31; break;
+            case 2: days += 59; break;
+            case 3: days += 90; break;
+            case 4: days += 120; break;
+            case 5: days += 151; break;
+            case 6: days += 181; break;
+            case 7: days += 212; break;
+            case 8: days += 243; break;
+            case 9: days += 273; break;
+            case 10: days += 304; break;
+            case 11: days += 334; break;
         }
+
 
         System.out.println(fyear);
 
@@ -91,7 +105,7 @@ public class main {
         }catch (ParseException e){
             System.out.println("no");
         }
-        getDate();
+        //getDate();
         //System.out.println(ft.format(getDate()));
         //etDate() = ft.format(currentdate);
 
