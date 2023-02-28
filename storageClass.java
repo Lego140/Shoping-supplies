@@ -1,19 +1,25 @@
 import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 public class storageClass {
 
-    public void csvScanner(){
-        try {
-            Scanner sc = new Scanner(new File("C:\\Users\\woranath\\IdeaProjects\\Shopping list challenge\\src\\Book1.csv"));
-            sc.useDelimiter(",");   //sets the delimiter pattern
-            while (sc.hasNext())  //returns a boolean value
-            {
-                System.out.print(sc.next());  //find and returns the next complete token from this scanner
-            }
-            sc.close();  //closes the scanner
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
+    public static void csvScanner() throws IOException{
+        List<String[]> everything = new ArrayList<String[]>();
+
+        FileReader file = new FileReader("Book1.csv");
+        Scanner sc = new Scanner(file);
+
+        while (sc.hasNextLine()){
+            everything.add(new String[]{"","","",""});
         }
+
+
+
+        for (String[] row : everything){
+            Log.i(Tag,row[0]);
+        }
+
     }
 }
 
