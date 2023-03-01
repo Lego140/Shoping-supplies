@@ -1,24 +1,28 @@
-import java.text.SimpleDateFormat;
+import java.security.PrivateKey;
 import java.util.Date;
-import java.util.Scanner;
 
 public class timeMannager {
 
-    public static Date getDate() {
+    private static Date getDate() {
         //SimpleDateFormat ft = new SimpleDateFormat("yyyy-MM-dd");
-        Date currentDate = new Date();
-
-        return currentDate;
+        return new Date();
+    }
+    private static String addZero(int input){
+        String output = String.valueOf(input);
+        if (String.valueOf(input).length() == 1){
+            output = "0"+input;
+        }
+        return output;
     }
 
     public static long dateToSecond(String value){
         String input,month,year,day,time;
 
-        if (value !="-1"){
+        if (value != "-1"){
             input = value;
             month = input.substring(5,7);
             year = input.substring(0,4);
-            time = input.substring(11,19);
+            time = "00:00:00";
             day = input.substring(9,10);
         }
         else {
@@ -133,6 +137,7 @@ public class timeMannager {
             input -= day;
             month = i;
         }
+        month += 1;
         day = (Integer.valueOf((int) input))/86400;
         //System.out.println(day);
         input %= 86400;
@@ -142,6 +147,8 @@ public class timeMannager {
         input %= 60;
         second = (Integer.valueOf((int) input));
 
-        return (year + 1970) + "-"+ (month+1)+"-"+(day)+" "+(hour)+":"+(minute)+":"+(second);
+
+
+        return (year + 1970) + "-"+ (addZero(month))+"-"+(addZero(day))+" "+(addZero(hour))+":"+(addZero(minute))+":"+(addZero(second));
     }
 }
