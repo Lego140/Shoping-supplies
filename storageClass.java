@@ -12,11 +12,14 @@ public class storageClass {
     static List<List<String>> twoLayerListArray = new ArrayList<>();
     static int currentRow = 0;
 
+    public static ArrayList<ArrayList<String>> pfoodsArray = new ArrayList<>();
+    public static ArrayList<String> row = new ArrayList<>();
+
  
     public static void csvScanner() throws IOException{
         ArrayList<ArrayList<String>> foods = new ArrayList<>();
 
-        FileReader file = new FileReader("C:\\Users\\woranath\\IdeaProjects\\Shopping list challenge\\src\\Book1.csv");
+        FileReader file = new FileReader("C:\\Users\\NITRO\\Documents\\GitHub\\Shoping-supplies\\Book1.csv");
         Scanner sc = new Scanner(file);
         //System.out.println(sc.nextLine());
         int p=0;
@@ -35,24 +38,35 @@ public class storageClass {
             foodsArray[i] = row.toArray(new String[row.size()]);
         }
 
-
         for (int d=0;d<p;d++) {
             foodsArray[d][0] =   foodsArray[d][0].substring(2, foodsArray[d][0].length());
             foodsArray[d][3] =   foodsArray[d][3].substring(1, 2);
             foodsArray[d][1] =   foodsArray[d][1].substring(1, foodsArray[d][1].length());
             foodsArray[d][2] =   foodsArray[d][2].substring(1, foodsArray[d][2].length());
         }
-
+        int o = 0;
         for (int y=0; y<p;y++){
-            for (int o=0; o < 4;o++){
-                System.out.println(foodsArray[y][o]);
+            for (o=0;o < 4;o++){
+                //System.out.println(foodsArray[y][o]);
+                row.add(foodsArray[y][o]);
+                //pfoodsArray.get(pfoodsArray.size() - 1).add(foodsArray[y][o]);
+
+                //pfoodsArray.add(new ArrayList<String>());
+
+
             }
+            pfoodsArray.add(row);
+            o = 0;
+
         }
+
+
     }
+
 
     public static void writeCSV() throws IOException{
 
-        String filePath = "C:\\Users\\woranath\\IdeaProjects\\Shopping list challenge\\src\\Book1.csv";
+        String filePath = "C:\\Users\\NITRO\\Documents\\GitHub\\Shoping-supplies\\Book1.csv";
 
         // create a new file object
         File csvFile = new File(filePath);
@@ -64,8 +78,9 @@ public class storageClass {
 
         // add data to the CSV file on the next line
 
-        csvWriter.newLine();
+
         csvWriter.write(twoLayerListArray+",");
+        csvWriter.newLine();
         twoLayerListArray.clear();
         firstLayerData.clear();
         csvWriter.close();
@@ -178,11 +193,6 @@ public class storageClass {
 
         }
 
-        public
-
-        public static void removethings(){
-            System.out.println();
-    }
 
 
     }
