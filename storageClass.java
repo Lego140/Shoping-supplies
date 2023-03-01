@@ -178,6 +178,8 @@ public class storageClass {
 
         }
 
+        public
+
         public static void removethings(){
             System.out.println();
     }
