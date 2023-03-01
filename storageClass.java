@@ -150,7 +150,15 @@ public class storageClass {
 
          */
     }
+    public static long bigger(long input1, long input2){
+        long output = input2 - input1;
+        if (output < 1){
+            output *= -1;
+        }
+        return output;
+    }
 }
+
 
 
 
