@@ -28,15 +28,15 @@ public class timeMannager {
             time = getDate().toString().substring(11, 19);
             day = getDate().toString().substring(8, 10);
             switch (month) {
-                case "Jan" : month = "1"; break;
-                case "Feb" : month = "2"; break;
-                case "Mar" : month = "3"; break;
-                case "Apr" : month = "4"; break;
-                case "May" : month = "5"; break;
-                case "Jun" : month = "6"; break;
-                case "Jul" : month = "7"; break;
-                case "Aug" : month = "8"; break;
-                case "Sep" : month = "9"; break;
+                case "Jan" : month = "01"; break;
+                case "Feb" : month = "02"; break;
+                case "Mar" : month = "03"; break;
+                case "Apr" : month = "04"; break;
+                case "May" : month = "05"; break;
+                case "Jun" : month = "06"; break;
+                case "Jul" : month = "07"; break;
+                case "Aug" : month = "08"; break;
+                case "Sep" : month = "09"; break;
                 case "Oct" : month = "10"; break;
                 case "Nov" : month = "11"; break;
                 case "Dec" : month = "12";break;
@@ -115,8 +115,33 @@ public class timeMannager {
         return seconds;
     }
 
-    public static String secondToDate() {
+    public static String secondToDate(long input) {
+        int month=0,year,day= 0,hour, minute, second;
 
-        return "";
+        year = (Integer.valueOf((int) input)/126230400)*4;
+        input %= 126230400;
+        year += (Integer.valueOf((int) input))/31536000;
+        input %= 31536000;
+
+        for (int i = 1; (input - day) > 0; i++){
+            switch (i) {
+                case 1: case 3: case 5: case 7: case 8: case 10: case 12: day = 2678400; break;
+                case 4: case 6: case 9: case 11: day = 2592000; break;
+                default: if (year%4 == 0) {day = 2505600;} else {day = 2419200;} break;
+            }
+            //System.out.println(input);
+            input -= day;
+            month = i;
+        }
+        day = (Integer.valueOf((int) input))/86400;
+        //System.out.println(day);
+        input %= 86400;
+        hour = (Integer.valueOf((int) input))/3600;
+        input %= 3600;
+        minute = (Integer.valueOf((int) input))/60;
+        input %= 60;
+        second = (Integer.valueOf((int) input));
+
+        return (year + 1970) + "-"+ (month+1)+"-"+(day)+" "+(hour)+":"+(minute)+":"+(second);
     }
 }
