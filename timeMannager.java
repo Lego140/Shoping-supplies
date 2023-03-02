@@ -149,6 +149,6 @@ public class timeMannager {
 
 
 
-        return (year + 1970) + "-"+ (addZero(month))+"-"+(addZero(day))+" "+(addZero(hour))+":"+(addZero(minute))+":"+(addZero(second));
+        return (year + 1970) + "-"+ (addZero(month))+"-"+(addZero(day))+"/"+(addZero(hour))+":"+(addZero(minute))+":"+(addZero(second));
     }
 }
