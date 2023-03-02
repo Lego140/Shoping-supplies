@@ -73,7 +73,7 @@ public class storageClass {
         String result = null;
         for (int i =0; i < pfoodsArray.size();i++){
             for (int o = 0; o< 4;o++){
-                result = pfoodsArray.get(i).toString().replaceAll("[\\[\\]]", "");
+                result = pfoodsArray.get(i).toString().replaceAll("[\\[\\]\\s]", "");
 
             }
             csvWriter.write(result+",");
