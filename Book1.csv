@@ -1,0 +1,24 @@
+[[Fridge, input1, 3124-32-54, F]],
+[[Fridge, input2, 3214-43-54, F]],
+[[Freezer, input3, 4325-65-76, F]],
+[[Shelf, input4, 3214-54-76, F]],
+[[Fridge, input5, 3214-43-54, F]],
+[[Fridge, input6, 1435-45-65, F]],
+[[Fridge, input7, 3421-54-76, F]],
+[[Fridge, input8, 2144-54-65, F]],
+[[Fridge, input9, 2144-54-65, F]],
+[[Shelf, input10, 3214-54-54, F]],
+[[Fridge, fdsg, 3214-43-54, F]],
+[[Fridge, fszd, 3214-43-54, F]],
+Fridgeinput13124-32-54F
+Fridgeinput23214-43-54F
+Freezerinput34325-65-76F
+Fridgeinput53214-43-54F
+Fridgeinput61435-45-65F
+Fridgeinput73421-54-76F
+Fridgeinput82144-54-65F
+Fridgeinput92144-54-65F
+Shelfinput103214-54-54F
+Fridgefdsg3214-43-54F
+Fridgefszd3214-43-54F
+[],

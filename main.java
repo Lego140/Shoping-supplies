@@ -16,7 +16,7 @@ public class main {
         while (true){
             storageClass.inputFoods();
             storageClass.writeCSV();
-            System.out.println("Would you like to keep input? \n1. for yes \n2. for no ");
+            System.out.println("Would you like to keep inputing? \n1. for yes \n2. for no ");
             while(!sc.hasNextInt()){
                 System.out.println("Invalid input please enter 1 or 2: ");
                 sc.next();
@@ -32,6 +32,10 @@ public class main {
 
 
         }
+        storageClass.csvScanner();
+
+        storageClass.removeItems();
+        //storageClass.clearCSV();
 
     }
 

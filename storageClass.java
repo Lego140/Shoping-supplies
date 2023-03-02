@@ -17,56 +17,31 @@ public class storageClass {
 
  
     public static void csvScanner() throws IOException{
-        ArrayList<ArrayList<String>> foods = new ArrayList<>();
-
-        FileReader file = new FileReader("C:\\Users\\NITRO\\Documents\\GitHub\\Shoping-supplies\\Book1.csv");
+        FileReader file = new FileReader("C:\\Users\\woranath\\IdeaProjects\\Shopping list challenge\\src\\Book1.csv");
         Scanner sc = new Scanner(file);
-        //System.out.println(sc.nextLine());
-        int p=0;
-
+        int p = 0;
 
         while (sc.hasNextLine()){
             String values[] = sc.nextLine().split(",");
             ArrayList<String> row = new ArrayList<String>(Arrays.asList(values));
-            foods.add(row);
+            pfoodsArray.add(row);
             p++;
         }
 
-        String [][] foodsArray=new String[p][];
-        for (int i =0; i< p;i++){
-            ArrayList<String> row = foods.get(i);
-            foodsArray[i] = row.toArray(new String[row.size()]);
+        for (int d=0; d<p; d++) {
+            ArrayList<String> row = pfoodsArray.get(d);
+            row.set(0, row.get(0).substring(2));
+            row.set(3, row.get(3).substring(1, 2));
+            row.set(1, row.get(1).substring(1));
+            row.set(2, row.get(2).substring(1));
         }
-
-        for (int d=0;d<p;d++) {
-            foodsArray[d][0] =   foodsArray[d][0].substring(2, foodsArray[d][0].length());
-            foodsArray[d][3] =   foodsArray[d][3].substring(1, 2);
-            foodsArray[d][1] =   foodsArray[d][1].substring(1, foodsArray[d][1].length());
-            foodsArray[d][2] =   foodsArray[d][2].substring(1, foodsArray[d][2].length());
-        }
-        int o = 0;
-        for (int y=0; y<p;y++){
-            for (o=0;o < 4;o++){
-                //System.out.println(foodsArray[y][o]);
-                row.add(foodsArray[y][o]);
-                //pfoodsArray.get(pfoodsArray.size() - 1).add(foodsArray[y][o]);
-
-                //pfoodsArray.add(new ArrayList<String>());
-
-
-            }
-            pfoodsArray.add(row);
-            o = 0;
-
-        }
-
 
     }
 
 
     public static void writeCSV() throws IOException{
 
-        String filePath = "C:\\Users\\NITRO\\Documents\\GitHub\\Shoping-supplies\\Book1.csv";
+        String filePath = "C:\\Users\\woranath\\IdeaProjects\\Shopping list challenge\\src\\Book1.csv";
 
         // create a new file object
         File csvFile = new File(filePath);
@@ -77,10 +52,16 @@ public class storageClass {
 
 
         // add data to the CSV file on the next line
-
+        for (int i =0; i < pfoodsArray.size();i++){
+            for (int o = 0; o< 4;o++){
+                csvWriter.write(pfoodsArray.get(i).get(o));
+            }
+            csvWriter.newLine();
+        }
 
         csvWriter.write(twoLayerListArray+",");
         csvWriter.newLine();
+
         twoLayerListArray.clear();
         firstLayerData.clear();
         csvWriter.close();
@@ -195,7 +176,106 @@ public class storageClass {
 
 
 
+        public static void removeItems() throws IOException{
+            Scanner sc = new Scanner(System.in);
+            String naming[] = {"categorie: ","Item name: ","EXP date (YYYY-MM-dd): ","In your shopping list (F - false | T - True): "};
+            System.out.println("|| Remove Items ||\nThis is whats in you storage right now: ");
+            //System.out.println(pfoodsArray);
+            int identification = 1;
+
+
+            System.out.println("--------------- No."+identification+" ---------------");
+
+            for (int i = 0; i < pfoodsArray.size();i++){
+                for (int m=0;m<4;m++) {
+                    System.out.print(naming[m]);
+                    System.out.println(pfoodsArray.get(i).get(m) + " ");
+                }
+
+                
+                identification++;
+                
+                System.out.println("--------------- No."+identification+" ---------------");
+            }
+
+            System.out.println("|| Input NO. you want to remove from storage ||");
+
+
+            while (!sc.hasNextInt()) {
+                System.out.print("Invalid input. Please enter a number that is more then "+identification+" : ");
+                sc.next();
+            }
+            int remove = sc.nextInt();
+
+            while (remove < 1 || remove > identification) {
+                System.out.print("Invalid input. Please enter a number that is more then "+identification+" : ");
+                remove = sc.nextInt();
+            }
+
+            remove = remove-1;
+            String deleted ="";
+
+
+            for (int i = 0; i < pfoodsArray.size(); i++) {
+                if (i == remove) {
+                    deleted = ("Category: "+pfoodsArray.get(i).get(0)+"\nName: "+pfoodsArray.get(i).get(1)+"\nWith the EXP date: "+pfoodsArray.get(i).get(2));
+                    pfoodsArray.remove(i);
+
+                }
+            }
+
+
+            System.out.println("------------ Deleted item ------------ \n"+deleted+"\n------------------------------------- ");
+
+
+            boolean loop= true;
+            while (loop) {
+                System.out.println("Would you like to put this item in your Shopping list (Yes or No) : ");
+                String yn = sc.nextLine().trim();
+
+                if (yn.equalsIgnoreCase("Yes") || yn.equalsIgnoreCase("No")) {
+                    // valid input, do something
+                    System.out.println("You entered: " + yn);
+                    break;
+                } else {
+                    // invalid input, ask user to try again
+                    System.out.println("Invalid input, please try again.");
+                }
+
+            }
+
+
+            String removedButList = deleted;
+
+
+
+
     }
+
+    public static void clearCSV(){
+
+        String csvFilePath = "C:\\Users\\woranath\\IdeaProjects\\Shopping list challenge\\src\\Book1.csv";
+
+        try {
+            FileWriter writer = new FileWriter(csvFilePath, false);
+            writer.write("");  // write an empty string to clear the file
+            writer.close();
+            System.out.println("CSV file cleared successfully.");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+
+
+
+
+}
+
+
+
+
 
 
 
