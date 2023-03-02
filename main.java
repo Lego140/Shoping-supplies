@@ -37,6 +37,8 @@ public class main {
         storageClass.removeItems();
         storageClass.clearCSV();
         storageClass.writeCSV();
+        storageClass.csvScanner();
+        shoppingList.generateShoppingList();
 
     }
 

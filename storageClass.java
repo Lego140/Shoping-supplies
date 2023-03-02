@@ -240,12 +240,16 @@ public class storageClass {
             }
 
             remove = remove-1;
-            String deleted ="";
+            //String []deleted ={""};
 
+            ArrayList<String> deleted = new ArrayList<String>();
 
             for (int i = 0; i < pfoodsArray.size(); i++) {
-                if (i == remove) {
-                    deleted = ("Category: "+pfoodsArray.get(i).get(0)+"\nName: "+pfoodsArray.get(i).get(1)+"\nWith the EXP date: "+pfoodsArray.get(i).get(2));
+                if (i == remove) {;
+                    deleted.add(pfoodsArray.get(i).get(0));
+                    deleted.add(pfoodsArray.get(i).get(1));
+                    deleted.add("1");
+                    deleted.add("T");
                     pfoodsArray.remove(i);
 
                 }
@@ -262,7 +266,7 @@ public class storageClass {
 
                 if (yn.equalsIgnoreCase("Yes") || yn.equalsIgnoreCase("No")) {
                     // valid input, do something
-                    System.out.println("You entered: " + yn);
+                    shoppingList.pShoppingList.add(deleted);
                     break;
                 } else {
                     // invalid input, ask user to try again
@@ -272,7 +276,7 @@ public class storageClass {
             }
 
 
-            String removedButList = deleted;
+
 
 
 
