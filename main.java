@@ -32,10 +32,11 @@ public class main {
 
 
         }
+        storageClass.writeCSV();
         storageClass.csvScanner();
-
         storageClass.removeItems();
-        //storageClass.clearCSV();
+        storageClass.clearCSV();
+        storageClass.writeCSV();
 
     }
 

@@ -28,13 +28,28 @@ public class storageClass {
             p++;
         }
 
+        System.out.println(pfoodsArray);
+
         for (int d=0; d<p; d++) {
             ArrayList<String> row = pfoodsArray.get(d);
-            row.set(0, row.get(0).substring(2));
-            row.set(3, row.get(3).substring(1, 2));
-            row.set(1, row.get(1).substring(1));
-            row.set(2, row.get(2).substring(1));
+            //row.set(0, row.get(0).substring(2, pfoodsArray.get(d).length()));
+            //row.set(3, row.get(3).substring(1, 2));
+            //row.set(1, row.get(1).substring(1,pfoodsArray.get(d).length()));
+            //row.set(2, row.get(2).substring(1,pfoodsArray.get(d).length()));
+
+            //row.set(0, row.get(0).substring(0));
+            //row.set(1, row.get(1).substring(1));
+            //row.set(2, row.get(2).substring(1));
+            //row.set(3, row.get(3).substring(1, 2));
+
+
+
         }
+
+
+
+
+
 
     }
 
@@ -50,17 +65,29 @@ public class storageClass {
         BufferedWriter csvWriter = new BufferedWriter(new FileWriter(filePath, true));
 
 
+        //            String result = pfoodsArray.get(r).toString().replaceAll("[\\[\\]]", "");
+        //            csvWriter.write(pfoodsArray.get(i).get(o)+",");
+        //String result = pfoodsArray.get(0).toString().replaceAll("[\\[\\]]", "");
 
         // add data to the CSV file on the next line
+        String result = null;
         for (int i =0; i < pfoodsArray.size();i++){
             for (int o = 0; o< 4;o++){
-                csvWriter.write(pfoodsArray.get(i).get(o));
+                result = pfoodsArray.get(i).toString().replaceAll("[\\[\\]]", "");
+
             }
+            csvWriter.write(result+",");
             csvWriter.newLine();
         }
 
-        csvWriter.write(twoLayerListArray+",");
-        csvWriter.newLine();
+        for (int i =0; i < twoLayerListArray.size();i++){
+
+            result = twoLayerListArray.get(i).toString().replaceAll("[\\[\\]\\s]", "");
+            csvWriter.write(result+",");
+
+            csvWriter.newLine();
+        }
+
 
         twoLayerListArray.clear();
         firstLayerData.clear();
