@@ -8,7 +8,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 public class storageClass {
-    static List<String> firstLayerData = new ArrayList<>();
+    static ArrayList<String> firstLayerData = new ArrayList<>();
     static List<List<String>> twoLayerListArray = new ArrayList<>();
     static int currentRow = 0;
 
@@ -28,7 +28,7 @@ public class storageClass {
             p++;
         }
 
-        System.out.println(pfoodsArray);
+        //System.out.println(pfoodsArray);
 
         for (int d=0; d<p; d++) {
             ArrayList<String> row = pfoodsArray.get(d);
@@ -74,22 +74,14 @@ public class storageClass {
         for (int i =0; i < pfoodsArray.size();i++){
             for (int o = 0; o< 4;o++){
                 result = pfoodsArray.get(i).toString().replaceAll("[\\[\\]\\s]", "");
-
             }
             csvWriter.write(result+",");
             csvWriter.newLine();
         }
 
-        for (int i =0; i < twoLayerListArray.size();i++){
-
-            result = twoLayerListArray.get(i).toString().replaceAll("[\\[\\]\\s]", "");
-            csvWriter.write(result+",");
-
-            csvWriter.newLine();
-        }
 
 
-        twoLayerListArray.clear();
+
         firstLayerData.clear();
         csvWriter.close();
 
@@ -159,7 +151,7 @@ public class storageClass {
         String exp = sc.next();
         //String currentYear = (Date() + " ").toString().substring(24, 28);
         int year = Integer.valueOf(exp.substring(0,4));
-        System.out.println(year);
+        //System.out.println(year);
         //timeMannager.dateToSecond(exp);
         //System.out.println(timeMannager.dateToSecond(exp));
         //if (year< Integer.valueOf(getDate())){}
@@ -186,9 +178,9 @@ public class storageClass {
 
         for (int b= 0; b<4;b++) {
             firstLayerData.add(test[b]);
-            System.out.println(firstLayerData);
+            //System.out.println(firstLayerData);
         }
-        twoLayerListArray.add(firstLayerData);
+        pfoodsArray.add(firstLayerData);
 
 
 
@@ -203,77 +195,97 @@ public class storageClass {
 
 
 
-        public static void removeItems() throws IOException{
+        public static void removeItems() throws IOException {
             Scanner sc = new Scanner(System.in);
-            String naming[] = {"categorie: ","Item name: ","EXP date (YYYY-MM-dd): ","In your shopping list (F - false | T - True): "};
+            String naming[] = {"categorie: ", "Item name: ", "EXP date (YYYY-MM-dd): ", "In your shopping list (F - false | T - True): "};
             System.out.println("|| Remove Items ||\nThis is whats in you storage right now: ");
             //System.out.println(pfoodsArray);
             int identification = 1;
 
 
-            System.out.println("--------------- No."+identification+" ---------------");
+            System.out.println("--------------- No." + identification + " ---------------");
 
-            for (int i = 0; i < pfoodsArray.size();i++){
-                for (int m=0;m<4;m++) {
+            for (int i = 0; i < pfoodsArray.size(); i++) {
+                for (int m = 0; m < 4; m++) {
                     System.out.print(naming[m]);
                     System.out.println(pfoodsArray.get(i).get(m) + " ");
                 }
 
-                
+
                 identification++;
-                
-                System.out.println("--------------- No."+identification+" ---------------");
+
+                System.out.println("--------------- No." + identification + " ---------------");
             }
+            System.out.println("delete nothing back to menue");
+            System.out.println("-----------------------------------------------------");
+
 
             System.out.println("|| Input NO. you want to remove from storage ||");
 
 
             while (!sc.hasNextInt()) {
-                System.out.print("Invalid input. Please enter a number that is more then "+identification+" : ");
+                System.out.print("Invalid input. Please enter a number that is more then " + identification + " : ");
                 sc.next();
             }
             int remove = sc.nextInt();
 
             while (remove < 1 || remove > identification) {
-                System.out.print("Invalid input. Please enter a number that is more then "+identification+" : ");
+                System.out.print("Invalid input. Please enter a number that is more then " + identification + " : ");
                 remove = sc.nextInt();
             }
 
-            remove = remove-1;
+            remove = remove - 1;
             //String []deleted ={""};
 
             ArrayList<String> deleted = new ArrayList<String>();
-
+            boolean keepGoing = false;
             for (int i = 0; i < pfoodsArray.size(); i++) {
-                if (i == remove) {;
+                if (remove == (identification)) {
+
+
+                } else if ((i == remove) && (remove != identification)){
                     deleted.add(pfoodsArray.get(i).get(0));
                     deleted.add(pfoodsArray.get(i).get(1));
+                    deleted.add(pfoodsArray.get(i).get(2));
                     deleted.add("1");
-                    deleted.add("T");
                     pfoodsArray.remove(i);
+                    keepGoing = true;
 
                 }
             }
+            if (keepGoing == true){
+                System.out.println("------------ Deleted item ------------");
+
+                for (int m = 0; m < 3; m++) {
+                    System.out.print(naming[m]);
+                    System.out.println(deleted.get(m) + " ");
+                }
+                System.out.println("--------------------------------------");
+
+                //System.out.println("------------ Deleted item ------------ \n" + deleted + "\n------------------------------------- ");
 
 
-            System.out.println("------------ Deleted item ------------ \n"+deleted+"\n------------------------------------- ");
+                 boolean loop = true;
+                 while (loop) {
+                     System.out.println("Would you like to put this item in your Shopping list (Yes or No) : ");
+                     String yn = sc.nextLine().trim();
 
-
-            boolean loop= true;
-            while (loop) {
-                System.out.println("Would you like to put this item in your Shopping list (Yes or No) : ");
-                String yn = sc.nextLine().trim();
-
-                if (yn.equalsIgnoreCase("Yes") || yn.equalsIgnoreCase("No")) {
+                     if (yn.equalsIgnoreCase("Yes") || yn.equalsIgnoreCase("No")) {
                     // valid input, do something
-                    shoppingList.pShoppingList.add(deleted);
-                    break;
-                } else {
+                         deleted.remove(3);
+                         deleted.remove(2);
+                         deleted.add("1");
+                         //System.out.println("TES TESTES "+deleted);
+                         shoppingList.pShoppingList.add(deleted);
+                         break;
+                    } else {
                     // invalid input, ask user to try again
                     System.out.println("Invalid input, please try again.");
-                }
+                    }
 
-            }
+                }
+        }
+
 
 
 
@@ -295,6 +307,26 @@ public class storageClass {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+    public static void viewStorage(){
+        String naming[] = {"categorie: ","Item name: ","EXP date (YYYY-MM-dd): ","In your shopping list (F - false | T - True): "};
+        System.out.println("----------------------------------\nThis is whats in you storage right now\n----------------------------------");
+        //System.out.println(pfoodsArray);
+
+        int identification = 1;
+        System.out.println("--------------- No."+identification+" ---------------");
+        for (int i = 0; i < pfoodsArray.size();i++){
+            for (int m=0;m<4;m++) {
+                System.out.print(naming[m]);
+                System.out.println(pfoodsArray.get(i).get(m) + " ");
+            }
+
+
+            identification++;
+
+            System.out.println("--------------- No."+identification+" ---------------");
+        }
+
     }
 
 

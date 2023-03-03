@@ -151,4 +151,17 @@ public class timeMannager {
 
         return (year + 1970) + "-"+ (addZero(month))+"-"+(addZero(day))+"/"+(addZero(hour))+":"+(addZero(minute))+":"+(addZero(second));
     }
+
+    public static void checkEXPAndPutInShoppingList(){
+
+        for (int i =0; i< storageClass.pfoodsArray.size();i++){
+            dateToSecond(storageClass.pfoodsArray.get(i).get(2); 1);
+
+
+        }
+
+
+    }
+
+
 }
