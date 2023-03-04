@@ -47,17 +47,7 @@ public class timeMannager {
                 default: month = "0";
             }
         }
-        //String fullgetdate = year+"-"+month+"-"+day+" "+time;
-
-        //System.out.println(fullgetdate);
         String Final = year+"-"+month+"-"+day+" "+time;
-
-        //String seconds = ft.format(input);
-        //int inputYear = input.substring(0,5);
-        //System.out.println(seconds);
-
-
-
         Date t = getDate();
         Date Fcurrentdate = getDate();
 
@@ -90,32 +80,6 @@ public class timeMannager {
         int hours = days*24 + Integer.valueOf(time.substring(0,2));
         long minutes = hours*60 + Integer.valueOf(time.substring(3,5));
         long seconds = minutes*60 + Integer.valueOf((time+" ").substring(6,8));
-        //System.out.println(seconds);
-
-
-        /*
-        try{
-            t = ft.parse(input);
-            Fcurrentdate = ft.parse(Final);
-            //seconds = ft.parse(Final);
-            //System.out.println(t);
-
-        }catch (ParseException e){
-            System.out.println("no");
-        }
-        //getDate();
-        //System.out.println(ft.format(getDate()));
-        //etDate() = ft.format(currentdate);
-
-        int result = t.compareTo(Fcurrentdate);
-
-
-
-        System.out.println(result);
-        System.out.println(Final);
-        */
-
-
         return seconds;
     }
 
@@ -133,7 +97,6 @@ public class timeMannager {
                 case 4: case 6: case 9: case 11: day = 2592000; break;
                 default: if (year%4 == 0) {day = 2505600;} else {day = 2419200;} break;
             }
-            //System.out.println(input);
             input -= day;
             month = i;
         }
