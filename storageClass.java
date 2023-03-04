@@ -157,7 +157,7 @@ public class storageClass {
         String name = sc.next();
 
         System.out.println("| Successful input |\nEnter the Exspiary date of the item in YYYY-MM-dd: ");
-        while (!sc.hasNext("\\d\\d\\d\\d-\\d\\d-\\d\\d")) {
+        while ((!sc.hasNext("\\d\\d\\d\\d-\\d\\d-\\d\\d"))||(sc.nextLine.substring(0,5))) {
             System.out.print("Invalid input. Please enter Exspiary date of the item in YYYY-MM-dd\nif it is a digit day ex the 4th do 04 instead: ");
 
             sc.next();
