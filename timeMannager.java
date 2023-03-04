@@ -85,11 +85,15 @@ public class timeMannager {
 
     public static String secondToDate(long input) {
         int month=0,year,day= 0,hour, minute, second;
-
+        input = input*-1;
         year = (Integer.valueOf((int) input)/126230400)*4;
+
+
         input %= 126230400;
         year += (Integer.valueOf((int) input))/31536000;
         input %= 31536000;
+
+        day = 2678400;
 
         for (int i = 1; (input - day) > 0; i++){
             switch (i) {
@@ -100,7 +104,7 @@ public class timeMannager {
             input -= day;
             month = i;
         }
-        month += 1;
+        System.out.println(input);
         day = (Integer.valueOf((int) input))/86400;
         //System.out.println(day);
         input %= 86400;
@@ -112,19 +116,11 @@ public class timeMannager {
 
 
 
-        return (year + 1970) + "-"+ (addZero(month))+"-"+(addZero(day))+"/"+(addZero(hour))+":"+(addZero(minute))+":"+(addZero(second));
+
+        return (year) + "-"+ (addZero(month))+"-"+(addZero(day))+"/"+(addZero(hour))+":"+(addZero(minute))+":"+(addZero(second));
     }
 
-    public static void checkEXPAndPutInShoppingList(){
 
-        for (int i =0; i< storageClass.pfoodsArray.size();i++){
-            dateToSecond(storageClass.pfoodsArray.get(i).get(2); 1);
-
-
-        }
-
-
-    }
 
 
 }

@@ -6,31 +6,41 @@ import java.util.List;
 public class notification {
 
     public static ArrayList<ArrayList<String>> pExpArray = new ArrayList<>();
-    public static ArrayList<String> row = new ArrayList<>();
+    static ArrayList<String> row = new ArrayList<>();
     private static Integer[] addElement(Integer[] arr, int element, int position) {
         List<Integer> list = new ArrayList<>(Arrays.asList(arr));
         list.add(position, element);
         list.remove(6);
         return list.toArray(arr);
-
     }
     public static void  generateExpList() {
-        String[] tempList= ["","",""]
+        String[] tempList= {"","","",""};
         for (int i = 0; i < storageClass.pfoodsArray.size(); i++) {
-                if (((((timeMannager.dateToSecond(storageClass.pfoodsArray.get(i).get(3))) - (timeMannager.dateToSecond("-1")) > 0)) {
-                    tempList = [storageClass.pfoodsArray.get(i).get(0)),storageClass.pfoodsArray.get(i).get(1)),(timeMannager.dateToSecond(storageClass.pfoodsArray.get(i).get(3))) - (timeMannager.dateToSecond("-1"))]
-                    ArrayList<String> row = new ArrayList<String>(Arrays.asList(values));
+                if ((((timeMannager.dateToSecond(storageClass.pfoodsArray.get(i).get(2))) - (timeMannager.dateToSecond("-1"))) < 0)) {
+                    //categorrie name expDate howlongexpfor
+                    for(int u= 0; u<3;u++){
+                        tempList [u] =  storageClass.pfoodsArray.get(i).get(u);
+                    }
+                    //tempList[3] = String.valueOf(  timeMannager.secondToDate   ((timeMannager.dateToSecond(storageClass.pfoodsArray.get(i).get(2))) - (timeMannager.dateToSecond("-1"))));
+                    tempList[3] = timeMannager.secondToDate((timeMannager.dateToSecond(storageClass.pfoodsArray.get(i).get(2))) - (timeMannager.dateToSecond("-1")));
+                    ArrayList<String> row = new ArrayList<String>(Arrays.asList(tempList));
+                    pExpArray.add(row);
             }
         }
     }
 
     public static void notificationForStuffAlreadyExpired() throws IOException {
         storageClass.csvScanner();
-        System.out.printf("|Already expired|");
-        for (int i = 0; i < storageClass.pfoodsArray.size(); i++) {
-            if (timeMannager.dateToSecond(storageClass.pfoodsArray.get(i).get(2)) - (timeMannager.dateToSecond("-1")) < 1) {
-                System.out.println("A " + storageClass.pfoodsArray.get(i).get(1) + " in the " + storageClass.pfoodsArray.get(i).get(0) + " is expired");
+        String naming[] = {"categorie: ","Item name: ","EXP date (YYYY-MM-dd): ","time its been expired for: "};
+        System.out.println("----------------------------------\nItems already exspired\n----------------------------------");
+        for (int k=0; k< pExpArray.size();k++){
+            System.out.println("-----------------------------------------");
+            for (int m=0;m<4;m++) {
+                System.out.print(naming[m]);
+                System.out.println(pExpArray.get(k).get(m) + " ");
             }
+            System.out.println("-----------------------------------------");
+
         }
     }
     public static void notificaionForAboutToExpired() throws IOException {
@@ -49,7 +59,7 @@ public class notification {
         for (int i = 1; i <= 5; i++) {
             String month, days, hour, minute, second;
             int year;
-            year = Integer.valueOf(storageClass.pfoodsArray.get(soonToDie[1]).get(2).substring(0, 4)) - 1970;
+            year = Integer.valueOf(storageClass.pfoodsArray.get(soonToDie[1]).get(2).substring(0, 4));
             month = storageClass.pfoodsArray.get(soonToDie[i]).get(2).substring(5, 7);
             days = storageClass.pfoodsArray.get(soonToDie[i]).get(2).substring(8, 10);
             hour = storageClass.pfoodsArray.get(soonToDie[i]).get(2).substring(11, 13);
@@ -61,8 +71,4 @@ public class notification {
 }
 
 
-    public static void notificaionForAboutToExpired() throws IOException {
-        storageClass.csvScanner();
-        System.out.println(storageClass.pfoodsArray.get(0).get(1));
-    }
-}
+

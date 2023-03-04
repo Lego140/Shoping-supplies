@@ -17,6 +17,7 @@ public class storageClass {
 
  
     public static void csvScanner() throws IOException{
+        notification.generateExpList();
         FileReader file = new FileReader("C:\\Users\\woranath\\IdeaProjects\\Shopping list challenge\\src\\Book1.csv");
         Scanner sc = new Scanner(file);
         int p = 0;
@@ -27,6 +28,22 @@ public class storageClass {
             pfoodsArray.add(row);
             p++;
         }
+
+        for (int j = 0;j<pfoodsArray.size();j++){
+            for(int l = 0;l < notification.pExpArray.size();l++){
+
+                if (pfoodsArray.get(j).get(1) == notification.pExpArray.get(l).get(1)){
+                    pfoodsArray.remove(j);
+                    clearCSV();
+                    writeCSV();
+                }
+
+
+            }
+
+        }
+
+
 
         //System.out.println(pfoodsArray);
 
@@ -216,8 +233,8 @@ public class storageClass {
 
                 System.out.println("--------------- No." + identification + " ---------------");
             }
-            System.out.println("delete nothing back to menue");
-            System.out.println("-----------------------------------------------------");
+            System.out.println("delete nothing back to menu");
+            System.out.println("------------------------------------");
 
 
             System.out.println("|| Input NO. you want to remove from storage ||");
@@ -276,7 +293,9 @@ public class storageClass {
                          deleted.remove(2);
                          deleted.add("1");
                          //System.out.println("TES TESTES "+deleted);
-                         shoppingList.pShoppingList.add(deleted);
+                         if (yn.equalsIgnoreCase("Yes")){
+                             shoppingList.pShoppingList.add(deleted);
+                         }
                          break;
                     } else {
                     // invalid input, ask user to try again
@@ -303,12 +322,12 @@ public class storageClass {
             FileWriter writer = new FileWriter(csvFilePath, false);
             writer.write("");  // write an empty string to clear the file
             writer.close();
-            System.out.println("CSV file cleared successfully.");
+            //System.out.println("CSV file cleared successfully.");
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
-    public static void viewStorage(){
+    public static void viewStorage() throws IOException {
         String naming[] = {"categorie: ","Item name: ","EXP date (YYYY-MM-dd): ","In your shopping list (F - false | T - True): "};
         System.out.println("----------------------------------\nThis is whats in you storage right now\n----------------------------------");
         //System.out.println(pfoodsArray);
@@ -326,6 +345,7 @@ public class storageClass {
 
             System.out.println("--------------- No."+identification+" ---------------");
         }
+        notification.notificationForStuffAlreadyExpired();
 
     }
 

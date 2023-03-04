@@ -9,6 +9,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 public class main {
+    static boolean menuLoop = true;
 
     public static void callMenue() throws IOException{
         Scanner sc = new Scanner(System.in);
@@ -54,6 +55,8 @@ public class main {
 
         System.out.println("\n----------------------------------------------\nNotifications\n----------------------------------------------");
 
+        notification.notificaionForAboutToExpired();
+
         // Atony input you notification funtion here @@@@@
 
         //idealy it should print out something like
@@ -97,9 +100,27 @@ public class main {
                 break;
             }
             case 6: {
-
+                shoppingList.scanShoppingList();
+                shoppingList.viewShoppingList();
             }
 
+
+        }
+
+
+        while (true) {
+            System.out.println("would you like to close the system?\nYes or no: ");
+            String yn = sc.nextLine().trim();
+
+            if (yn.equalsIgnoreCase("Yes") || yn.equalsIgnoreCase("No")) {
+                if (yn.equalsIgnoreCase("No")){
+                    menuLoop = false;
+                }
+                break;
+            } else {
+                // invalid input, ask user to try again
+                System.out.println("Invalid input Enter yes or no");
+            }
 
         }
 
@@ -134,22 +155,19 @@ public class main {
 
 
     public static void main(String[] args) throws IOException {
-        callMenue();
-
-
-
-
-
-
-
-
-
         storageClass.csvScanner();
-        storageClass.removeItems();
-        storageClass.clearCSV();
-        storageClass.writeCSV();
-        storageClass.csvScanner();
-        shoppingList.generateShoppingList();
+        shoppingList.scanShoppingList();
+        notification.generateExpList();
+
+        while (menuLoop == true) {
+            callMenue();
+
+        }
+        System.out.println("-------------------------- \nSystem closed\n-------------------------- ");
+
+
+
+
     }
 
 }

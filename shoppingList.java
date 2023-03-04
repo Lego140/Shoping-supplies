@@ -198,8 +198,9 @@ public class shoppingList {
 
             System.out.println("--------------- No." + identification + " ---------------");
         }
-        System.out.println("delete nothing back to menue");
-        System.out.println("-----------------------------------------------------");
+        System.out.println("delete nothing back to menu");
+        System.out.println("------------------------------------");
+
 
 
         System.out.println("|| Input NO. you want to remove from shopping list ||");
