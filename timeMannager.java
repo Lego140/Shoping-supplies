@@ -96,15 +96,16 @@ public class timeMannager {
         day = 2678400;
 
         for (int i = 1; (input - day) > 0; i++){
-            switch (i) {
+            input -= day;
+            month = i;
+            switch (i+1) {
                 case 1: case 3: case 5: case 7: case 8: case 10: case 12: day = 2678400; break;
                 case 4: case 6: case 9: case 11: day = 2592000; break;
                 default: if (year%4 == 0) {day = 2505600;} else {day = 2419200;} break;
             }
-            input -= day;
-            month = i;
+
         }
-        System.out.println(input);
+        //System.out.println(input);
         day = (Integer.valueOf((int) input))/86400;
         //System.out.println(day);
         input %= 86400;

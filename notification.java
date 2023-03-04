@@ -1,12 +1,14 @@
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 public class notification {
 
     public static ArrayList<ArrayList<String>> pExpArray = new ArrayList<>();
     static ArrayList<String> row = new ArrayList<>();
+    public static         List<List<String>> soonToDieSorted = new ArrayList<>();
     private static Integer[] addElement(Integer[] arr, int element, int position) {
         List<Integer> list = new ArrayList<>(Arrays.asList(arr));
         list.add(position, element);
@@ -47,6 +49,44 @@ public class notification {
         storageClass.csvScanner();
         //need to make it so everytime this function is called it printeds the top most expired part.
         Integer[] soonToDie = {0, 0, 0, 0, 0, 0};
+        ArrayList<Integer> soonToDierow = new ArrayList<Integer>();
+
+
+        for  (int e= 0; e <  storageClass.pfoodsArray.size();e++){
+            soonToDierow.add((int) (Integer.valueOf((int)timeMannager.dateToSecond(storageClass.pfoodsArray.get(e).get(2))) - (timeMannager.dateToSecond("-1"))));
+        }
+
+        Collections.sort(soonToDierow);
+        //System.out.println(soonToDierow);
+
+        for(int y = 0;y < soonToDierow.size();y++){
+            if (soonToDierow.get(y) < 0){
+                soonToDierow.remove(y);
+                y=y-1;
+            }
+        }
+        //System.out.println(soonToDierow);
+
+
+        for (int e = 0; e < storageClass.pfoodsArray.size();e++){
+            for (int  u =0; u<soonToDierow.size();u++){
+                // (nteger.valueOf((int) (timeMannager.dateToSecond(storageClass.pfoodsArray.get(e).get(2)) - timeMannager.dateToSecond("-1"))) == soonToDierow.get(u))
+                if (((int) (Integer.valueOf((int)timeMannager.dateToSecond(storageClass.pfoodsArray.get(e).get(2))) - (timeMannager.dateToSecond("-1")))) == soonToDierow.get(u)){
+
+                    String values[] = {storageClass.pfoodsArray.get(e).get(0),storageClass.pfoodsArray.get(e).get(1), String.valueOf(soonToDierow.get(u))};
+                    ArrayList<String> row2 = new ArrayList<>(Arrays.asList(values));
+                    soonToDieSorted.add(row2);
+                    break;
+                }
+            }
+        }
+
+        //System.out.println(soonToDieSorted);
+
+
+
+
+        /*
 
         for (int i = 0; i < storageClass.pfoodsArray.size(); i++) {
             for (int k = 0; k < 5; k++) {
@@ -66,8 +106,11 @@ public class notification {
             //hour = storageClass.pfoodsArray.get(soonToDie[i]).get(2).substring(11, 13);
             //minute = storageClass.pfoodsArray.get(soonToDie[i]).get(2).substring(14, 16);
             //second = storageClass.pfoodsArray.get(soonToDie[i]).get(2).substring(17, 19);
-            System.out.println("A " + storageClass.pfoodsArray.get(soonToDie[i]).get(1) + " in the " + storageClass.pfoodsArray.get(soonToDie[i]).get(0) + " will expire in " + year + " years " + month + " month " + days + " days " + hour + " hours " + minute + " minutes and " + second + " seconds");
+            System.out.println("A " + storageClass.pfoodsArray.get(soonToDie[i]).get(1) + " in the " + storageClass.pfoodsArray.get(soonToDie[i]).get(0) + " will expire in " + timeMannager.secondToDate((timeMannager.dateToSecond("-1"))- (timeMannager.dateToSecond(storageClass.pfoodsArray.get(soonToDie[i]).get(2)))));
         }
+
+        */
+
     }
 }
 

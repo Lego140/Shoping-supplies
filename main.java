@@ -11,7 +11,7 @@ import java.io.IOException;
 public class main {
     static boolean menuLoop = true;
 
-    public static void callMenue() throws IOException{
+    public static void callMenue() throws IOException, InterruptedException {
         Scanner sc = new Scanner(System.in);
         int width = 100;
         int height = 20;
@@ -42,7 +42,34 @@ public class main {
         }
         System.out.println("---------------------------------------------------------------------------------------------------");
         System.out.println(" \nthe Storage system that will never make you foget to buy your supplies and never eat exspirred food again. \nAlways have healthy safe food to eat.");
+        Thread.sleep(4000);
 
+        System.out.println("\n----------------------------------------------\nNotifications\n----------------------------------------------");
+
+        notification.notificaionForAboutToExpired();
+        if (notification.soonToDieSorted.size()<5){
+            for (int o = 0; o< notification.soonToDieSorted.size();o++){
+                System.out.println("---------------------------------------");
+                System.out.println("Categorie: "+notification.soonToDieSorted.get(o).get(0));
+                System.out.println("name: "+notification.soonToDieSorted.get(o).get(0));
+                System.out.println("Goingto exspire in: "+(Integer.valueOf(notification.soonToDieSorted.get(o).get(0))/60)+" Hours");
+
+            }
+        }else{
+            for (int o = 0; o< 5;o++){
+                System.out.println("---------------------------------------");
+                System.out.println("Categorie: "+notification.soonToDieSorted.get(o).get(0));
+                System.out.println("name: "+notification.soonToDieSorted.get(o).get(1));
+                System.out.println("Goingto exspire in: "+(Integer.valueOf(notification.soonToDieSorted.get(o).get(2))/60)+" Hours");
+
+            }
+        }
+        Thread.sleep(4000);
+
+        // Atony input you notification funtion here @@@@@
+
+        //idealy it should print out something like
+        // Item name will exspire in No.days  no.hours hours
         System.out.println(" \n----------------------------------------------\nPick a operation below\n----------------------------------------------");
         System.out.println("1. Input foods to system \n ");
         System.out.println("2. Remove foods to system \n ");
@@ -52,15 +79,6 @@ public class main {
         System.out.println("6. Generate and Check whats in your shopping list \n ");
 
 
-
-        System.out.println("\n----------------------------------------------\nNotifications\n----------------------------------------------");
-
-        notification.notificaionForAboutToExpired();
-
-        // Atony input you notification funtion here @@@@@
-
-        //idealy it should print out something like
-        // Item name will exspire in No.days  no.hours hours
 
         while (!sc.hasNextInt()) {
             System.out.print("Invalid input Please enter a number 1 to 6 from: \n1. Input foods to system \n2. Remove foods to system \n3. Check what foods are in your system currently \n4. Input foods to shopping list \n5. Remove foods from shopping list \n6. Generate and Check whats in your shopping list \n");
@@ -113,8 +131,10 @@ public class main {
             String yn = sc.nextLine().trim();
 
             if (yn.equalsIgnoreCase("Yes") || yn.equalsIgnoreCase("No")) {
-                if (yn.equalsIgnoreCase("No")){
+                if (yn.equalsIgnoreCase("Yes")){
                     menuLoop = false;
+                }else {
+                    menuLoop = true;
                 }
                 break;
             } else {
@@ -132,6 +152,7 @@ public class main {
 
         while (true){
             storageClass.inputFoods();
+            storageClass.clearCSV();
             storageClass.writeCSV();
             System.out.println("Would you like to keep inputing? \n1. for yes \n2. for no ");
             while(!sc.hasNextInt()){
@@ -149,12 +170,12 @@ public class main {
 
 
         }
-
+        storageClass.clearCSV();
         storageClass.writeCSV();
     }
 
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, InterruptedException {
         storageClass.csvScanner();
         shoppingList.scanShoppingList();
         notification.generateExpList();

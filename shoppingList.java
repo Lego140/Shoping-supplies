@@ -33,7 +33,7 @@ public class shoppingList {
             FileWriter writer = new FileWriter(csvFilePath, false);
             writer.write("");  // write an empty string to clear the file
             writer.close();
-            System.out.println("Shopping list cleared successfully.");
+            //System.out.println("Shopping list cleared successfully.");
         } catch (IOException e) {
             e.printStackTrace();
         }

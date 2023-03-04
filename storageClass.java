@@ -1,4 +1,5 @@
 import java.io.*;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.Date;
@@ -17,14 +18,20 @@ public class storageClass {
 
  
     public static void csvScanner() throws IOException{
-        notification.generateExpList();
+        //notification.generateExpList();
         FileReader file = new FileReader("C:\\Users\\woranath\\IdeaProjects\\Shopping list challenge\\src\\Book1.csv");
         Scanner sc = new Scanner(file);
         int p = 0;
+        for (int n = 0; n<pfoodsArray.size();n++){
+            pfoodsArray.remove(n);
+            n = n-1;
+        }
 
         while (sc.hasNextLine()){
             String values[] = sc.nextLine().split(",");
             ArrayList<String> row = new ArrayList<String>(Arrays.asList(values));
+
+
             pfoodsArray.add(row);
             p++;
         }
@@ -34,8 +41,7 @@ public class storageClass {
 
                 if (pfoodsArray.get(j).get(1) == notification.pExpArray.get(l).get(1)){
                     pfoodsArray.remove(j);
-                    clearCSV();
-                    writeCSV();
+
                 }
 
 
@@ -47,21 +53,6 @@ public class storageClass {
 
         //System.out.println(pfoodsArray);
 
-        for (int d=0; d<p; d++) {
-            ArrayList<String> row = pfoodsArray.get(d);
-            //row.set(0, row.get(0).substring(2, pfoodsArray.get(d).length()));
-            //row.set(3, row.get(3).substring(1, 2));
-            //row.set(1, row.get(1).substring(1,pfoodsArray.get(d).length()));
-            //row.set(2, row.get(2).substring(1,pfoodsArray.get(d).length()));
-
-            //row.set(0, row.get(0).substring(0));
-            //row.set(1, row.get(1).substring(1));
-            //row.set(2, row.get(2).substring(1));
-            //row.set(3, row.get(3).substring(1, 2));
-
-
-
-        }
 
 
 
@@ -157,7 +148,9 @@ public class storageClass {
         String name = sc.next();
 
         System.out.println("| Successful input |\nEnter the Exspiary date of the item in YYYY-MM-dd: ");
-        while ((!sc.hasNext("\\d\\d\\d\\d-\\d\\d-\\d\\d"))||((Integer.valueOf(sc.nextLine().substring(0,5))%4) ==0) ){
+
+
+        while ((!sc.hasNext("\\d\\d\\d\\d-\\d\\d-\\d\\d"))){
             System.out.print("Invalid input. Please enter Exspiary date of the item in YYYY-MM-dd\nif it is a digit day ex the 4th do 04 instead: ");
 
             sc.next();
@@ -165,9 +158,35 @@ public class storageClass {
 
 
 
-        String exp = sc.next();
+
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        dateFormat.setLenient(false); // disallow invalid dates like Feb 30
+        String exp="";
+        while (true) {
+            System.out.print("Enter a date in the format dd-MM-yyyy: ");
+
+            while ((!sc.hasNext("\\d\\d\\d\\d-\\d\\d-\\d\\d"))){
+                System.out.print("Invalid input. Please enter Exspiary date of the item in YYYY-MM-dd\nif it is a digit day ex the 4th do 04 instead: ");
+
+                sc.next();
+            }
+            String input = sc.nextLine();
+
+            exp = input;
+            try {
+                Date date = dateFormat.parse(input);
+                break; // exit the loop when a valid date is entered
+            } catch (ParseException e) {
+                System.out.println("Invalid date format. Please enter a EXP date in the format yyyy-MM-dd.");
+            }
+        }
+
+
+
+
+
         //String currentYear = (Date() + " ").toString().substring(24, 28);
-        int year = Integer.valueOf(exp.substring(0,4));
+
         //System.out.println(year);
         //timeMannager.dateToSecond(exp);
         //System.out.println(timeMannager.dateToSecond(exp));
