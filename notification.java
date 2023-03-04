@@ -14,7 +14,7 @@ public class notification {
         return list.toArray(arr);
     }
     public static void  generateExpList() {
-        String[] tempList= {"","","",""};
+        String[] tempList= {"","",""};
         for (int i = 0; i < storageClass.pfoodsArray.size(); i++) {
                 if ((((timeMannager.dateToSecond(storageClass.pfoodsArray.get(i).get(2))) - (timeMannager.dateToSecond("-1"))) < 0)) {
                     //categorrie name expDate howlongexpfor
@@ -22,7 +22,7 @@ public class notification {
                         tempList [u] =  storageClass.pfoodsArray.get(i).get(u);
                     }
                     //tempList[3] = String.valueOf(  timeMannager.secondToDate   ((timeMannager.dateToSecond(storageClass.pfoodsArray.get(i).get(2))) - (timeMannager.dateToSecond("-1"))));
-                    tempList[3] = timeMannager.secondToDate((timeMannager.dateToSecond(storageClass.pfoodsArray.get(i).get(2))) - (timeMannager.dateToSecond("-1")));
+
                     ArrayList<String> row = new ArrayList<String>(Arrays.asList(tempList));
                     pExpArray.add(row);
             }
@@ -47,6 +47,7 @@ public class notification {
         storageClass.csvScanner();
         //need to make it so everytime this function is called it printeds the top most expired part.
         Integer[] soonToDie = {0, 0, 0, 0, 0, 0};
+
         for (int i = 0; i < storageClass.pfoodsArray.size(); i++) {
             for (int k = 0; k < 5; k++) {
                 if ((timeMannager.dateToSecond(storageClass.pfoodsArray.get(soonToDie[k]).get(2)) - (timeMannager.dateToSecond("-1")) < (timeMannager.dateToSecond(storageClass.pfoodsArray.get(i).get(2))) - (timeMannager.dateToSecond("-1"))) && ((timeMannager.dateToSecond(storageClass.pfoodsArray.get(i).get(3))) - (timeMannager.dateToSecond("-1")) > 0)) {
@@ -62,9 +63,9 @@ public class notification {
             year = Integer.valueOf(storageClass.pfoodsArray.get(soonToDie[1]).get(2).substring(0, 4));
             month = storageClass.pfoodsArray.get(soonToDie[i]).get(2).substring(5, 7);
             days = storageClass.pfoodsArray.get(soonToDie[i]).get(2).substring(8, 10);
-            hour = storageClass.pfoodsArray.get(soonToDie[i]).get(2).substring(11, 13);
-            minute = storageClass.pfoodsArray.get(soonToDie[i]).get(2).substring(14, 16);
-            second = storageClass.pfoodsArray.get(soonToDie[i]).get(2).substring(17, 19);
+            //hour = storageClass.pfoodsArray.get(soonToDie[i]).get(2).substring(11, 13);
+            //minute = storageClass.pfoodsArray.get(soonToDie[i]).get(2).substring(14, 16);
+            //second = storageClass.pfoodsArray.get(soonToDie[i]).get(2).substring(17, 19);
             System.out.println("A " + storageClass.pfoodsArray.get(soonToDie[i]).get(1) + " in the " + storageClass.pfoodsArray.get(soonToDie[i]).get(0) + " will expire in " + year + " years " + month + " month " + days + " days " + hour + " hours " + minute + " minutes and " + second + " seconds");
         }
     }
