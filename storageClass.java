@@ -213,15 +213,15 @@ public class storageClass {
         test[2]= exp2 ;
         test[3] = "F";
 
-
         for (int b= 0; b<4;b++) {
             firstLayerData.add(test[b]);
+
             //pfoodsArray.get(pfoodsArray.size()+1).add(test[b]);
             //System.out.println(firstLayerData);
         }
         pfoodsArray.add(firstLayerData);
         System.out.println(pfoodsArray);
-        //System.out.println(pfoodsArray);
+        System.out.println(firstLayerData);
 
 
 

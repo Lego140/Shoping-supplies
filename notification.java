@@ -16,17 +16,19 @@ public class notification {
         return list.toArray(arr);
     }
     public static void  generateExpList() {
-        String[] tempList= {"","",""};
+        String[] tempList= {"","","",""};
         for (int i = 0; i < storageClass.pfoodsArray.size(); i++) {
                 if ((((timeMannager.dateToSecond(storageClass.pfoodsArray.get(i).get(2))) - (timeMannager.dateToSecond("-1"))) < 0)) {
                     //categorrie name expDate howlongexpfor
                     for(int u= 0; u<3;u++){
                         tempList [u] =  storageClass.pfoodsArray.get(i).get(u);
                     }
+                    tempList [3] = String.valueOf(timeMannager.dateToSecond(storageClass.pfoodsArray.get(i).get(2))-timeMannager.dateToSecond("-1"));
                     //tempList[3] = String.valueOf(  timeMannager.secondToDate   ((timeMannager.dateToSecond(storageClass.pfoodsArray.get(i).get(2))) - (timeMannager.dateToSecond("-1"))));
 
                     ArrayList<String> row = new ArrayList<String>(Arrays.asList(tempList));
                     pExpArray.add(row);
+                    //pExpArray.get(0).add(String.valueOf(timeMannager.dateToSecond(storageClass.pfoodsArray.get(i).get(2))-timeMannager.dateToSecond("-1")));
             }
         }
     }
@@ -35,11 +37,20 @@ public class notification {
         storageClass.csvScanner();
         String naming[] = {"categorie: ","Item name: ","EXP date (YYYY-MM-dd): ","time its been expired for: "};
         System.out.println("----------------------------------\nItems already exspired\n----------------------------------");
-        for (int k=0; k< pExpArray.size();k++){
+
+
+
+
+        for (int k=0; k < pExpArray.size();k++){
             System.out.println("-----------------------------------------");
             for (int m=0;m<4;m++) {
                 System.out.print(naming[m]);
-                System.out.println(pExpArray.get(k).get(m) + " ");
+                if(m == 3){
+                    System.out.println(pExpArray.get(k).get(m) + " hours");
+                }else{
+                    System.out.println(pExpArray.get(k).get(m) + " ");
+                }
+
             }
             System.out.println("-----------------------------------------");
 
@@ -47,6 +58,7 @@ public class notification {
     }
     public static void notificaionForAboutToExpired() throws IOException {
         storageClass.csvScanner();
+
 
 
         for(int r =0;r<soonToDieSorted.size();r++){

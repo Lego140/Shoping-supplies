@@ -151,6 +151,7 @@ public class main {
         Scanner sc = new Scanner(System.in);
 
         while (true){
+            storageClass.csvScanner();
             storageClass.inputFoods();
             storageClass.clearCSV();
             storageClass.writeCSV();
