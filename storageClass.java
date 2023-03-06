@@ -83,25 +83,41 @@ public class storageClass {
 
         // add data to the CSV file on the next line
         String result = "";
+        String fresult [] ={"","","",""};
+
         for (int i =0; i < pfoodsArray.size();i++){
-            for (int o = 0; o< 4;o++){
-                result = pfoodsArray.get(i).toString().replaceAll("[\\[\\]\\s]", "");
-            }
-            System.out.println(result);
+            result = pfoodsArray.get(i).toString().replaceAll("[\\[\\]\\s]", "");
             csvWriter.write(result+",");
             csvWriter.newLine();
         }
 
 
+        /*
+        for (int i =0; i < pfoodsArray.size();i++){
+
+            for (int o = 0; o< 4;o++){
+                //result = pfoodsArray.get(i).toString().replaceAll("[\\[\\]\\s]", "");
+                //fresult [o] = pfoodsArray.get(i).get(o);
+                csvWriter.write(pfoodsArray.get(i).get(o)+",");
+            }
+            //System.out.println(fresult);
+            //csvWriter.writeNext(fresult+",");
+            csvWriter.newLine();
+        }
+
+         */
 
 
-        firstLayerData.clear();
+
+
+
+        //firstLayerData.clear();
         csvWriter.close();
-
 
     }
 
     public static void inputFoods() throws IOException{
+        firstLayerData.clear();
 
 
         Scanner sc = new Scanner(System.in);
@@ -158,27 +174,16 @@ public class storageClass {
 
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         dateFormat.setLenient(false); // disallow invalid dates like Feb 30
-        String exp="";
-        while (true) {
-            System.out.print("Enter a date in the format yyyy-MM-dd: ");
+        String exp2 = "d";
+        exp2 = sc.nextLine();
+        System.out.print("Enter a date in the format yyyy-MM-dd: ");
 
-            while ((!sc.hasNext("\\d\\d\\d\\d-\\d\\d-\\d\\d"))){
-                System.out.print("Invalid input. Please enter Exspiary date of the item in YYYY-MM-dd\nif it is a digit day ex the 4th do 04 instead: ");
+        while ((!sc.hasNext("\\d\\d\\d\\d-\\d\\d-\\d\\d"))){
+            System.out.print("Invalid input. Please enter Exspiary date of the item in YYYY-MM-dd\nif it is a digit day ex the 4th do 04 instead: ");
 
-                sc.next();
-            }
-            String input = sc.nextLine();
-
-            exp = input;
-            try {
-                Date date = dateFormat.parse(input);
-                break; // exit the loop when a valid date is entered
-            } catch (ParseException e) {
-                System.out.println("Invalid date format. Please enter a EXP date in the format yyyy-MM-dd.");
-            }
+            sc.next();
         }
-
-
+        exp2 = sc.nextLine();
 
 
 
@@ -205,17 +210,19 @@ public class storageClass {
 
         test[0]=categorySTR;
         test[1]=name;
-        test[2]=exp;
+        test[2]= exp2 ;
         test[3] = "F";
 
 
         for (int b= 0; b<4;b++) {
             firstLayerData.add(test[b]);
+            //pfoodsArray.get(pfoodsArray.size()+1).add(test[b]);
             //System.out.println(firstLayerData);
         }
         pfoodsArray.add(firstLayerData);
+        System.out.println(pfoodsArray);
+        //System.out.println(pfoodsArray);
 
-        firstLayerData.clear();
 
 
 
