@@ -18,8 +18,11 @@ public class storageClass {
 
  
     public static void csvScanner() throws IOException{
+        String filePath  = System.getProperty("user.dir").replace("\\", "\\\\");
+        filePath = filePath+"\\\\src\\\\Book1.csv";
+
         //notification.generateExpList();
-        FileReader file = new FileReader("C:\\Users\\woranath\\IdeaProjects\\Shopping list challenge\\src\\Book1.csv");
+        FileReader file = new FileReader(filePath);
         Scanner sc = new Scanner(file);
         int p = 0;
         for (int n = 0; n<pfoodsArray.size();n++){
@@ -64,13 +67,14 @@ public class storageClass {
 
     public static void writeCSV() throws IOException{
 
-        String filePath = "C:\\Users\\woranath\\IdeaProjects\\Shopping list challenge\\src\\Book1.csv";
 
+        String filePath  = System.getProperty("user.dir").replace("\\", "\\\\");
+        filePath = filePath+"\\\\src\\\\Book1.csv";
         // create a new file object
         File csvFile = new File(filePath);
 
 
-        BufferedWriter csvWriter = new BufferedWriter(new FileWriter(filePath, true));
+        BufferedWriter csvWriter = new BufferedWriter(new FileWriter(csvFile, true));
 
 
         //            String result = pfoodsArray.get(r).toString().replaceAll("[\\[\\]]", "");
@@ -78,11 +82,12 @@ public class storageClass {
         //String result = pfoodsArray.get(0).toString().replaceAll("[\\[\\]]", "");
 
         // add data to the CSV file on the next line
-        String result = null;
+        String result = "";
         for (int i =0; i < pfoodsArray.size();i++){
             for (int o = 0; o< 4;o++){
                 result = pfoodsArray.get(i).toString().replaceAll("[\\[\\]\\s]", "");
             }
+            System.out.println(result);
             csvWriter.write(result+",");
             csvWriter.newLine();
         }
@@ -147,15 +152,7 @@ public class storageClass {
         }
         String name = sc.next();
 
-        System.out.println("| Successful input |\nEnter the Exspiary date of the item in YYYY-MM-dd: ");
-
-
-        while ((!sc.hasNext("\\d\\d\\d\\d-\\d\\d-\\d\\d"))){
-            System.out.print("Invalid input. Please enter Exspiary date of the item in YYYY-MM-dd\nif it is a digit day ex the 4th do 04 instead: ");
-
-            sc.next();
-        }
-
+        System.out.println("| Successful input |");
 
 
 
@@ -163,7 +160,7 @@ public class storageClass {
         dateFormat.setLenient(false); // disallow invalid dates like Feb 30
         String exp="";
         while (true) {
-            System.out.print("Enter a date in the format dd-MM-yyyy: ");
+            System.out.print("Enter a date in the format yyyy-MM-dd: ");
 
             while ((!sc.hasNext("\\d\\d\\d\\d-\\d\\d-\\d\\d"))){
                 System.out.print("Invalid input. Please enter Exspiary date of the item in YYYY-MM-dd\nif it is a digit day ex the 4th do 04 instead: ");
@@ -218,6 +215,7 @@ public class storageClass {
         }
         pfoodsArray.add(firstLayerData);
 
+        firstLayerData.clear();
 
 
 

@@ -47,6 +47,15 @@ public class notification {
     }
     public static void notificaionForAboutToExpired() throws IOException {
         storageClass.csvScanner();
+
+
+        for(int r =0;r<soonToDieSorted.size();r++){
+            soonToDieSorted.remove(r);
+            r = r-1;
+        }
+
+
+
         //need to make it so everytime this function is called it printeds the top most expired part.
         Integer[] soonToDie = {0, 0, 0, 0, 0, 0};
         ArrayList<Integer> soonToDierow = new ArrayList<Integer>();

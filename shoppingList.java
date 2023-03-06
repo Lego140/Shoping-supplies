@@ -8,9 +8,17 @@ public class shoppingList {
     public static ArrayList<ArrayList<String>> pShoppingList = new ArrayList<>();
 
     public static void scanShoppingList() throws IOException{
-        FileReader file = new FileReader("C:\\Users\\woranath\\IdeaProjects\\Shopping list challenge\\src\\shopinglist.csv");
+        String filePath  = System.getProperty("user.dir").replace("\\", "\\\\");
+        filePath = filePath+"\\\\src\\\\shopinglist.csv";
+
+        FileReader file = new FileReader(filePath);
         Scanner sc = new Scanner(file);
         int p = 0;
+        for(int r =0;r<pShoppingList.size();r++){
+            pShoppingList.remove(r);
+            r = r-1;
+        }
+
 
         while (sc.hasNextLine()) {
             String values[] = sc.nextLine().split(",");
@@ -26,8 +34,10 @@ public class shoppingList {
 
         }
     public static void clearShoppingList(){
+        String filePath  = System.getProperty("user.dir").replace("\\", "\\\\");
+        filePath = filePath+"\\\\src\\\\shopinglist.csv";
 
-        String csvFilePath = "C:\\Users\\woranath\\IdeaProjects\\Shopping list challenge\\src\\shopinglist.csv";
+        String csvFilePath = filePath;
 
         try {
             FileWriter writer = new FileWriter(csvFilePath, false);
@@ -74,8 +84,8 @@ public class shoppingList {
     }
 
     public static void writeShopingList() throws IOException {
-
-        String filePath = "C:\\Users\\woranath\\IdeaProjects\\Shopping list challenge\\src\\shopinglist.csv";
+        String filePath  = System.getProperty("user.dir").replace("\\", "\\\\");
+        filePath = filePath+"\\\\src\\\\shopinglist.csv";
 
         // create a new file object
         File csvFile = new File(filePath);
