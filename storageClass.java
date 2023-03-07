@@ -174,8 +174,8 @@ public class storageClass {
 
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         dateFormat.setLenient(false); // disallow invalid dates like Feb 30
-        String exp2 = "d";
-        exp2 = sc.nextLine();
+        String exp2;
+        //exp2 = sc.nextLine();
         System.out.print("Enter a date in the format yyyy-MM-dd: ");
 
         while ((!sc.hasNext("\\d\\d\\d\\d-\\d\\d-\\d\\d"))){
@@ -183,7 +183,7 @@ public class storageClass {
 
             sc.next();
         }
-        exp2 = sc.nextLine();
+        exp2 = sc.next();
 
 
 
@@ -212,6 +212,7 @@ public class storageClass {
         test[1]=name;
         test[2]= exp2 ;
         test[3] = "F";
+        System.out.println(exp2);
 
         for (int b= 0; b<4;b++) {
             firstLayerData.add(test[b]);

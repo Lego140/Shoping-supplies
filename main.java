@@ -52,7 +52,7 @@ public class main {
                 System.out.println("---------------------------------------");
                 System.out.println("Categorie: "+notification.soonToDieSorted.get(o).get(0));
                 System.out.println("name: "+notification.soonToDieSorted.get(o).get(1));
-                System.out.println("Going to exspire in: "+((Integer.valueOf(notification.soonToDieSorted.get(o).get(2)))/60)+" Hours");
+                System.out.println("Going to exspire in: "+((Integer.valueOf(notification.soonToDieSorted.get(o).get(2)))/3600)+" Hours");
 
             }
         }else{
@@ -60,7 +60,7 @@ public class main {
                 System.out.println("---------------------------------------");
                 System.out.println("Categorie: "+notification.soonToDieSorted.get(o).get(0));
                 System.out.println("name: "+notification.soonToDieSorted.get(o).get(1));
-                System.out.println("Going to exspire in: "+((Integer.valueOf(notification.soonToDieSorted.get(o).get(2)))/60)+" Hours");
+                System.out.println("Going to exspire in: "+((Integer.valueOf(notification.soonToDieSorted.get(o).get(2)))/3600)+" Hours");
 
             }
         }
